@@ -1,4 +1,3 @@
-import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -8,62 +7,44 @@ import { useState } from "react";
 function App() {
   const [date, setDate] = useState("");
   const [item, setItem] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
-  const [contents, setContents] = useState([
-    {
-      id: "25600f72-56b4-41a7-a9c2-47358580e2f8",
-      date: "2024-01-05",
-      item: "식비",
-      amount: 100000,
-      description: "세광양대창",
-    },
-    {
-      id: "25600f72-53b4-4187-a9c2-47358580e2f8",
-      date: "2024-01-10",
-      item: "도서",
-      amount: 40500,
-      description: "모던 자바스크립트",
-    },
-    {
-      id: "24310f72-56b4-41a7-a9c2-458580ef1f8",
-      date: "2024-02-02",
-      item: "식비",
-      amount: 50000,
-      description: "회식",
-    },
-    {
-      id: "25600f72-99b4-41z7-e4h6-47312365e2f8",
-      date: "2024-02-02",
-      item: "간식",
-      amount: 500,
-      description: "아이스크림",
-    },
-    {
-      id: "25143e72-16e2-22a7-a9c2-47358580e2f8",
-      date: "2024-02-02",
-      item: "여행",
-      amount: 1055000,
-      description: "일본여행",
-    },
-    {
-      id: "25600f72-97p2-14a7-a9c2-47363950e2t8",
-      date: "2024-02-02",
-      item: "미용",
-      amount: 155000,
-      description: "미용실",
-    },
-    {
-      id: "24312f70-97q2-14a7-a9c2-47132950e2t8",
-      date: "2024-02-02",
-      item: "도서",
-      amount: 75000,
-      description:
-        "자율주행차량 운전주행모드 자동 전환용 인식률 90% 이상의 다중 센서 기반 운전자 상태 인식 및 상황 인식 원천 기술 개발",
-    },
-  ]);
+  const [contents, setContents] = useState([]);
 
-  console.log(contents);
+  const [clickedMonth, setClickedMonth] = useState(null);
+
+  {
+    /*
+
+  !!!!!!!!!! 요구사항 !!!!!!!!!!
+
+  📆 인풋 섹션(InputSection.jsx)
+   - ✅ 지출 항목 등록 기능
+   - ✅ 입력 내용 유효성 검사
+   - ✅ uuid 라이브러리 사용
+
+  📆 월별 버튼 섹션(MonthlySection.jsx)
+   - ✅ 월을 클릭했을 때 어떤 탭이 활성화되었는지 styled-components의 조건부 스타일링 하기
+   - ✅ 버튼 눌렀을 때 당월 데이터만 가져오기...
+   - 🚧 화면 처음 로딩시 1월에 포커싱??
+
+  💰 지출내역섹션(Expenditure.jsx)
+   - 🚧 금액부분에 천 단위마다 "," 넣어서 가독성있게 만들어주기 
+   - 🚧 description 한 줄까지만 표현하고 그 이상의 내용은 ...으로 표현하기
+   - ✅🚧 월별에 맞는 데이터 보여주기
+      로컬 스토리지를 사용하여 마지막으로 선택된 '월'을 저장하고, 
+      해당 페이지가 다시 시작 될 때마다 해당 값을 불러옵니다. 
+      useEffect를 사용하여 월이 변경될 때마다 로컬 스토리지에 값을 저장합니다.
+
+  상세페이지
+   - ✅ 지출내역 클릭 시 상세화면으로 이동 (id값을 가지고..)
+   - ✅ 삭제, 뒤로가기 버튼
+   - 🚧 수정할 값을 받는 input을 만들 때 useRef 사용하기
+   - 🚧 수정 버튼을 누르면, 기존 지출의 데이터를 수정하고 ‘홈’ 으로 이동합니다.(변경사항 바로 적용되어야함)
+   - ✅ 삭제 버튼 클릭 시 즉시 삭제하기 보다는 사용자에게 확인받은 뒤 삭제처리 하도록 해주세요. 
+   - ✅ 삭제 이후에는 홈으로 이동시켜주세요.
+*/
+  }
 
   return (
     <>
@@ -78,16 +59,18 @@ function App() {
                 amount={amount}
                 description={description}
                 contents={contents}
+                clickedMonth={clickedMonth}
                 setDate={setDate}
                 setItem={setItem}
                 setAmount={setAmount}
                 setDescription={setDescription}
                 setContents={setContents}
+                setClickedMonth={setClickedMonth}
               />
             }
           />
           <Route
-            path="/detail:id"
+            path="/detail/:id"
             element={
               <Detail
                 date={date}

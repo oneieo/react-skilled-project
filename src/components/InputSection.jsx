@@ -47,8 +47,11 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #5353ff;
+  background-color: #8585ed;
   color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
 `;
 
 const InputSection = ({
@@ -69,21 +72,33 @@ const InputSection = ({
   const handleItem = (e) => {
     setItem(e.target.value);
   };
-  const handleAmount = (e) => {
-    setAmount(e.target.value); //
-  };
   const handleDescription = (e) => {
     setDescription(e.target.value);
+  };
+  const handleAmount = (e) => {
+    setAmount(e.target.value);
   };
 
   // 지출내역 추가될 때마다(상태변경될때마다) 로컬스토리지에 contents 세팅
   useEffect(() => {
-    localStorage.setItem("contents", JSON.stringify(contents));
-  }, [contents]);
+    // 로컬스토리지: 저장용 / setState: 화면그리기용
+    // 1. 로컬스토리지에서 컨텐츠를 가져온다.
+    const baseContents = JSON.parse(localStorage.getItem("contents"));
+    // 0. 만약 로컬스토리지에 컨텐츠가 없다면, setContents는 빈배열로 초기값 주기
+    if (!baseContents) {
+      return;
+    }
+    // 2. 가져온 걸 스테이트에 넣는다.
+    setContents(baseContents);
+  }, []);
 
   const handleSaveBtn = () => {
     if (!date.trim() || !item.trim() || !amount.trim() || !description.trim()) {
       alert("내용을 모두 입력해주세요.");
+      return;
+    }
+    if (date.trim().length < 10) {
+      alert("날짜는 YYYY-MM-DD 형식으로 입력하세요.");
       return;
     }
     if (isNaN(amount)) {
@@ -98,7 +113,12 @@ const InputSection = ({
       amount: Number(amount),
       description,
     };
-    setContents([newContent, ...contents]);
+    setContents([...contents, newContent]);
+    localStorage.setItem("contents", JSON.stringify([...contents, newContent]));
+    setDate("");
+    setItem("");
+    setDescription("");
+    setAmount("");
   };
 
   return (
@@ -113,19 +133,19 @@ const InputSection = ({
           <Input placeholder="지출 항목" value={item} onChange={handleItem} />
         </Box>
         <Box>
-          <Label>금액</Label>
-          <Input
-            placeholder="지출 금액"
-            value={amount}
-            onChange={handleAmount}
-          />
-        </Box>
-        <Box>
           <Label>내용</Label>
           <Input
             placeholder="지출 내용"
             value={description}
             onChange={handleDescription}
+          />
+        </Box>
+        <Box>
+          <Label>금액</Label>
+          <Input
+            placeholder="지출 금액"
+            value={amount}
+            onChange={handleAmount}
           />
         </Box>
         <Button onClick={handleSaveBtn}>저장</Button>

@@ -8,11 +8,13 @@ const Home = ({
   amount,
   description,
   contents,
+  clickedMonth,
   setDate,
   setItem,
   setAmount,
   setDescription,
   setContents,
+  setClickedMonth,
 }) => {
   return (
     <div>
@@ -28,8 +30,11 @@ const Home = ({
         setDescription={setDescription}
         setContents={setContents}
       />
-      <MonthlySection />
-      <Expenditure contents={contents} />
+      <MonthlySection
+        clickedMonth={clickedMonth}
+        setClickedMonth={setClickedMonth}
+      />
+      <Expenditure contents={contents} clickedMonth={clickedMonth} />
     </div>
   );
 };

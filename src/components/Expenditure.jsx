@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -28,6 +29,7 @@ const Box = styled.div`
   flex-direction: column;
   justify-content: center;
   background-color: #7ce079;
+  cursor: pointer;
 `;
 
 const Texts = styled.div`
@@ -39,6 +41,7 @@ const Texts = styled.div`
   margin-left: 30px;
   margin-right: 30px;
 `;
+
 const Left = styled.div`
   width: 600px;
   display: flex;
@@ -82,16 +85,19 @@ const ExpenditureAmount = styled.span`
   font-weight: bold;
 `;
 
-const Expenditure = () => {
-  const dataList = JSON.parse(localStorage.getItem("contents"));
-  // 새로고침 해야 새로 저장한 값이 들어오네요??
+const Expenditure = ({ contents, clickedMonth }) => {
+  const navigate = useNavigate();
+
+  const filteredList = contents.filter((data) => {
+    if (Number(data.date.slice(5, 7)) === clickedMonth) return data;
+  });
 
   return (
     <Wrapper>
       <Boxes>
-        {dataList.map((data) => {
+        {filteredList.map((data) => {
           return (
-            <Box key={data.id}>
+            <Box key={data.id} onClick={() => navigate(`/detail/${data.id}`)}>
               <Texts>
                 <Left>
                   <Date>{data.date}</Date>

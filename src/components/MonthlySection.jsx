@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -28,17 +27,18 @@ const MonthBtn = styled.button`
   border: none;
   border-radius: 10px;
   font-size: 17px;
+  // MonthBtn의 prop들(key, color, onClick) 중 color에서
+  // 연산을 통해 넘겨받은 컬러(prop.color)로 색상 지정하기
   background-color: ${(prop) => prop.color};
+  cursor: pointer;
 `;
 
-// 정적인 데이터로 컴포넌트 외부에 두는 것이 좋음
+// 정적인 데이터는 컴포넌트 외부에 두는 것이 좋음
 const monthList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-const MonthlySection = () => {
-  const [color, setColor] = useState("lightblue");
-
-  const handleMonthBtn = () => {
-    color === "lightblue" ? setColor("yellow") : setColor("lightblue");
+const MonthlySection = ({ clickedMonth, setClickedMonth }) => {
+  const handleMonthBtn = (month) => {
+    setClickedMonth(month);
   };
 
   return (
@@ -46,7 +46,11 @@ const MonthlySection = () => {
       <Boxes>
         {monthList.map((month) => {
           return (
-            <MonthBtn key={month} color={color} onClick={handleMonthBtn}>
+            <MonthBtn
+              key={month}
+              color={month === clickedMonth ? "yellow" : "lightblue"}
+              onClick={() => handleMonthBtn(month)}
+            >
               {month}월
             </MonthBtn>
           );
