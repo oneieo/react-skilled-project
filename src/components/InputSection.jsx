@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 const Wrapper = styled.div`
   width: 800px;
@@ -51,30 +51,18 @@ const Button = styled.button`
   color: white;
 `;
 
-const InputSection = () => {
-  const [date, setDate] = useState("");
-  const [item, setItem] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [description, setDescription] = useState("");
-  const [contents, setContents] = useState([
-    {
-      id: uuidv4(),
-      date: "2024-01-01",
-      item: "식비",
-      amount: 23000,
-      description: "엽떡",
-    },
-    {
-      id: uuidv4(),
-      date: "2024-01-02",
-      item: "도서",
-      amount: 23000,
-      description: "리액트",
-    },
-  ]);
-
-  console.log(contents);
-
+const InputSection = ({
+  date,
+  item,
+  amount,
+  description,
+  contents,
+  setDate,
+  setItem,
+  setAmount,
+  setDescription,
+  setContents,
+}) => {
   const handleDate = (e) => {
     setDate(e.target.value);
   };
@@ -82,25 +70,34 @@ const InputSection = () => {
     setItem(e.target.value);
   };
   const handleAmount = (e) => {
-    setAmount(Number(e.target.value));
+    setAmount(e.target.value); //
   };
   const handleDescription = (e) => {
     setDescription(e.target.value);
   };
 
+  // 지출내역 추가될 때마다(상태변경될때마다) 로컬스토리지에 contents 세팅
+  useEffect(() => {
+    localStorage.setItem("contents", JSON.stringify(contents));
+  }, [contents]);
+
   const handleSaveBtn = () => {
+    if (!date.trim() || !item.trim() || !amount.trim() || !description.trim()) {
+      alert("내용을 모두 입력해주세요.");
+      return;
+    }
+    if (isNaN(amount)) {
+      alert("금액에는 숫자를 입력하세요.");
+      return;
+    }
+
     const newContent = {
       id: uuidv4(),
       date,
       item,
-      amount,
+      amount: Number(amount),
       description,
     };
-
-    if (!date.trim() || !item.trim() || !amount || !description.trim()) {
-      alert("내용을 모두 입력해주세요.");
-      return;
-    }
     setContents([newContent, ...contents]);
   };
 

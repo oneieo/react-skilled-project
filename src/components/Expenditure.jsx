@@ -26,15 +26,86 @@ const Box = styled.div`
   height: 61px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   background-color: #7ce079;
 `;
 
+const Texts = styled.div`
+  width: 700px;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 30px;
+  margin-right: 30px;
+`;
+const Left = styled.div`
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Date = styled.span`
+  width: 600px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+`;
+
+const ExpenditureDetail = styled.span`
+  width: 600px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+`;
+
+const Right = styled.div`
+  width: 100px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  align-items: center;
+`;
+
+const ExpenditureAmount = styled.span`
+  width: 100px;
+  height: 60px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+`;
+
 const Expenditure = () => {
+  const dataList = JSON.parse(localStorage.getItem("contents"));
+  // 새로고침 해야 새로 저장한 값이 들어오네요??
+
   return (
     <Wrapper>
       <Boxes>
-        <Box></Box>
-        <Box></Box>
+        {dataList.map((data) => {
+          return (
+            <Box key={data.id}>
+              <Texts>
+                <Left>
+                  <Date>{data.date}</Date>
+                  <ExpenditureDetail>
+                    {data.item} - {data.description}
+                  </ExpenditureDetail>
+                </Left>
+                <Right>
+                  <ExpenditureAmount>{data.amount}원</ExpenditureAmount>
+                </Right>
+              </Texts>
+            </Box>
+          );
+        })}
       </Boxes>
     </Wrapper>
   );

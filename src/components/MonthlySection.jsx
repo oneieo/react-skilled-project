@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -24,24 +25,32 @@ const Boxes = styled.div`
 const MonthBtn = styled.button`
   width: 105px;
   height: 60px;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  background-color: ${(prop) => prop.color};
 `;
 
+// 정적인 데이터로 컴포넌트 외부에 두는 것이 좋음
+const monthList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
 const MonthlySection = () => {
+  const [color, setColor] = useState("lightblue");
+
+  const handleMonthBtn = () => {
+    color === "lightblue" ? setColor("yellow") : setColor("lightblue");
+  };
+
   return (
     <Wrapper>
       <Boxes>
-        <MonthBtn>1월</MonthBtn>
-        <MonthBtn>2월</MonthBtn>
-        <MonthBtn>3월</MonthBtn>
-        <MonthBtn>4월</MonthBtn>
-        <MonthBtn>5월</MonthBtn>
-        <MonthBtn>6월</MonthBtn>
-        <MonthBtn>7월</MonthBtn>
-        <MonthBtn>8월</MonthBtn>
-        <MonthBtn>9월</MonthBtn>
-        <MonthBtn>10월</MonthBtn>
-        <MonthBtn>11월</MonthBtn>
-        <MonthBtn>12월</MonthBtn>
+        {monthList.map((month) => {
+          return (
+            <MonthBtn key={month} color={color} onClick={handleMonthBtn}>
+              {month}월
+            </MonthBtn>
+          );
+        })}
       </Boxes>
     </Wrapper>
   );
