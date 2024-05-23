@@ -9,26 +9,30 @@ const Wrapper = styled.div`
   align-items: center;
   margin-top: 15px;
   margin-bottom: 20px;
-  background-color: pink;
+  background-color: #ffffff;
+  border: 2px solid #dadada;
+  border-radius: 15px;
 `;
 
 const Boxes = styled.div`
   width: 760px;
-  height: 365px;
+  height: 375px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #6fb9e8;
+  background-color: #ffffff;
   gap: 15px;
 `;
 
 const Box = styled.div`
   width: 760px;
-  height: 61px;
+  height: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #7ce079;
+  background-color: #ffffff;
+  border: 2px solid #dadada;
+  border-radius: 15px;
   cursor: pointer;
 `;
 
@@ -38,8 +42,8 @@ const Texts = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
 `;
 
 const Left = styled.div`
@@ -54,7 +58,9 @@ const Date = styled.span`
   height: 16px;
   display: flex;
   align-items: center;
-  font-size: 14px;
+  margin-bottom: 3px;
+  font-size: 13px;
+  color: grey;
 `;
 
 const ExpenditureDetail = styled.span`
@@ -64,6 +70,8 @@ const ExpenditureDetail = styled.span`
   align-items: center;
   font-size: 16px;
   font-weight: bold;
+  color: #343aa3;
+  overflow: hidden;
 `;
 
 const Right = styled.div`
@@ -83,6 +91,7 @@ const ExpenditureAmount = styled.span`
   align-items: center;
   font-size: 16px;
   font-weight: bold;
+  color: #343aa3;
 `;
 
 const Expenditure = ({ contents, clickedMonth }) => {

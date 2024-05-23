@@ -11,7 +11,7 @@ function App() {
   const [description, setDescription] = useState("");
   const [contents, setContents] = useState([]);
 
-  const [clickedMonth, setClickedMonth] = useState(null);
+  const [clickedMonth, setClickedMonth] = useState(1);
 
   {
     /*
@@ -26,7 +26,7 @@ function App() {
   📆 월별 버튼 섹션(MonthlySection.jsx)
    - ✅ 월을 클릭했을 때 어떤 탭이 활성화되었는지 styled-components의 조건부 스타일링 하기
    - ✅ 버튼 눌렀을 때 당월 데이터만 가져오기...
-   - 🚧 화면 처음 로딩시 1월에 포커싱??
+   - ✅ 화면 렌더링시 1월 버튼 활성화된 상태로 로딩(clickedMonth의 초기값을 1로 줌(month===1))
 
   💰 지출내역섹션(Expenditure.jsx)
    - 🚧 금액부분에 천 단위마다 "," 넣어서 가독성있게 만들어주기 

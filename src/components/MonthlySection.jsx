@@ -7,7 +7,9 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 15px;
-  background-color: lightgreen;
+  background-color: #ffffff;
+  border: 2px solid #dadada;
+  border-radius: 15px;
 `;
 
 const Boxes = styled.div`
@@ -17,7 +19,7 @@ const Boxes = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  background-color: pink;
+  background-color: #ffffff;
   gap: 20px;
 `;
 
@@ -29,8 +31,14 @@ const MonthBtn = styled.button`
   font-size: 17px;
   // MonthBtn의 prop들(key, color, onClick) 중 color에서
   // 연산을 통해 넘겨받은 컬러(prop.color)로 색상 지정하기
-  background-color: ${(prop) => prop.color};
+  background-color: ${(prop) => prop.$bgColor};
+  color: ${(prop) => prop.$color};
   cursor: pointer;
+  &:hover {
+    background-color: #5b80d5;
+    color: white;
+    transition: 0.3s;
+  }
 `;
 
 // 정적인 데이터는 컴포넌트 외부에 두는 것이 좋음
@@ -48,7 +56,8 @@ const MonthlySection = ({ clickedMonth, setClickedMonth }) => {
           return (
             <MonthBtn
               key={month}
-              color={month === clickedMonth ? "yellow" : "lightblue"}
+              $bgColor={month === clickedMonth ? "#6684cb" : "#cfddff"}
+              $color={month === clickedMonth ? "white" : "black"}
               onClick={() => handleMonthBtn(month)}
             >
               {month}월

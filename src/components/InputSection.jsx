@@ -6,10 +6,12 @@ const Wrapper = styled.div`
   width: 800px;
   height: 95px;
   margin-top: 30px;
-  background-color: lightblue;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #ffffff;
+  //border: 2px solid #dadada;
+  border-radius: 15px;
 `;
 
 const Boxes = styled.div`
@@ -18,7 +20,7 @@ const Boxes = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: pink;
+  background-color: #ffffff;
   gap: 10px;
 `;
 
@@ -32,26 +34,43 @@ const Label = styled.label`
   width: 160px;
   height: 15px;
   margin-bottom: 5px;
+  text-indent: 5px;
+  font-size: 14px;
 `;
 
 const Input = styled.input`
   width: 155px;
   height: 35px;
   text-indent: 10px;
+  border: 1px solid #dadada;
+  border-radius: 5px;
+  &::selection {
+    background-color: #ffd5d5;
+    //color: black;
+  }
+  &:focus {
+    outline: none;
+    background-color: #e8e8e8;
+  }
 `;
 
 const Button = styled.button`
   width: 60px;
-  margin-top: 21px;
+  margin-top: 19px;
   height: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #8585ed;
+  background-color: #6684cb;
   color: white;
   border: none;
   border-radius: 50px;
   cursor: pointer;
+
+  &:hover {
+    background-color: #5173c1;
+    transition: 0.3s;
+  }
 `;
 
 const InputSection = ({
@@ -97,7 +116,7 @@ const InputSection = ({
       alert("내용을 모두 입력해주세요.");
       return;
     }
-    if (date.trim().length < 10) {
+    if (date.trim().length > 10 || date.trim().length < 10) {
       alert("날짜는 YYYY-MM-DD 형식으로 입력하세요.");
       return;
     }
