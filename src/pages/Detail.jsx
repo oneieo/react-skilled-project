@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { ContentsContext } from "../context/ContentsContext";
 
 const Wrapper = styled.div`
   width: 800px;
@@ -74,7 +75,8 @@ const Button = styled.button`
   background-color: ${(prop) => prop.$color};
 `;
 
-const Detail = ({ contents, setContents }) => {
+const Detail = () => {
+  const { contents, setContents } = useContext(ContentsContext);
   const { id } = useParams();
   const matchedContent = contents.find((content) => content.id === id);
   console.log(contents);

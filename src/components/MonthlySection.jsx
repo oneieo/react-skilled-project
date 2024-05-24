@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { ClickedMonthContext } from "../context/ClickedMonthContext";
 
 const Wrapper = styled.div`
   width: 800px;
@@ -44,7 +46,8 @@ const MonthBtn = styled.button`
 // 정적인 데이터는 컴포넌트 외부에 두는 것이 좋음
 const monthList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-const MonthlySection = ({ clickedMonth, setClickedMonth }) => {
+const MonthlySection = () => {
+  const { clickedMonth, setClickedMonth } = useContext(ClickedMonthContext);
   const handleMonthBtn = (month) => {
     setClickedMonth(month);
   };

@@ -1,5 +1,8 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { ClickedMonthContext } from "../context/ClickedMonthContext";
+import { ContentsContext } from "../context/ContentsContext";
 
 const Wrapper = styled.div`
   width: 800px;
@@ -95,7 +98,9 @@ const ExpenditureAmount = styled.span`
   color: #343aa3;
 `;
 
-const Expenditure = ({ contents, clickedMonth }) => {
+const Expenditure = () => {
+  const { clickedMonth } = useContext(ClickedMonthContext);
+  const { contents } = useContext(ContentsContext);
   const navigate = useNavigate();
 
   const filteredList = contents.filter((data) => {
