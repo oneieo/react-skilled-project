@@ -45,7 +45,7 @@ const Input = styled.input`
   border: 1px solid #dadada;
   border-radius: 5px;
   &::selection {
-    background-color: #ffd5d5;
+    background-color: #b4c0fe;
     //color: black;
   }
   &:focus {
@@ -85,19 +85,6 @@ const InputSection = ({
   setDescription,
   setContents,
 }) => {
-  const handleDate = (e) => {
-    setDate(e.target.value);
-  };
-  const handleItem = (e) => {
-    setItem(e.target.value);
-  };
-  const handleDescription = (e) => {
-    setDescription(e.target.value);
-  };
-  const handleAmount = (e) => {
-    setAmount(e.target.value);
-  };
-
   // 지출내역 추가될 때마다(상태변경될때마다) 로컬스토리지에 contents 세팅
   useEffect(() => {
     // 로컬스토리지: 저장용 / setState: 화면그리기용
@@ -145,18 +132,32 @@ const InputSection = ({
       <Boxes>
         <Box>
           <Label>날짜</Label>
-          <Input placeholder="YYYY-MM-DD" value={date} onChange={handleDate} />
+          <Input
+            placeholder="YYYY-MM-DD"
+            value={date}
+            onChange={(e) => {
+              setDate(e.target.value);
+            }}
+          />
         </Box>
         <Box>
           <Label>항목</Label>
-          <Input placeholder="지출 항목" value={item} onChange={handleItem} />
+          <Input
+            placeholder="지출 항목"
+            value={item}
+            onChange={(e) => {
+              setItem(e.target.value);
+            }}
+          />
         </Box>
         <Box>
           <Label>내용</Label>
           <Input
             placeholder="지출 내용"
             value={description}
-            onChange={handleDescription}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
           />
         </Box>
         <Box>
@@ -164,7 +165,9 @@ const InputSection = ({
           <Input
             placeholder="지출 금액"
             value={amount}
-            onChange={handleAmount}
+            onChange={(e) => {
+              setAmount(e.target.value);
+            }}
           />
         </Box>
         <Button onClick={handleSaveBtn}>저장</Button>

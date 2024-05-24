@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   margin-top: 15px;
   margin-bottom: 20px;
   background-color: #ffffff;
-  border: 2px solid #dadada;
+  //border: 2px solid #dadada;
   border-radius: 15px;
 `;
 
@@ -22,6 +22,7 @@ const Boxes = styled.div`
   align-items: center;
   background-color: #ffffff;
   gap: 15px;
+  //overflow-y: scroll;
 `;
 
 const Box = styled.div`
@@ -115,7 +116,9 @@ const Expenditure = ({ contents, clickedMonth }) => {
                   </ExpenditureDetail>
                 </Left>
                 <Right>
-                  <ExpenditureAmount>{data.amount}원</ExpenditureAmount>
+                  <ExpenditureAmount>
+                    {data.amount.toLocaleString()}원
+                  </ExpenditureAmount>
                 </Right>
               </Texts>
             </Box>

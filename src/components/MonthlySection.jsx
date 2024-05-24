@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   align-items: center;
   margin-top: 15px;
   background-color: #ffffff;
-  border: 2px solid #dadada;
+  //border: 2px solid #dadada;
   border-radius: 15px;
 `;
 
