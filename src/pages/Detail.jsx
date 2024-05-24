@@ -97,7 +97,7 @@ const Detail = ({ contents, setContents }) => {
             date: refDate.current.value,
             item: refItem.current.value,
             description: refDescription.current.value,
-            amount: refAmount.current.value,
+            amount: Number(refAmount.current.value).toLocaleString(),
           }
         : content;
     });
