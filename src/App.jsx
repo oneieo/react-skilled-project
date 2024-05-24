@@ -9,14 +9,15 @@ import { AmountContext } from "./context/AmountContext";
 import { DescriptionContext } from "./context/DescriptionContext";
 import { ContentsContext } from "./context/ContentsContext";
 import { ClickedMonthContext } from "./context/ClickedMonthContext";
+import getToday from "./utils/getToday";
 
 function App() {
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(getToday());
   const [item, setItem] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [contents, setContents] = useState([]);
-  const [clickedMonth, setClickedMonth] = useState(1);
+  const [clickedMonth, setClickedMonth] = useState(new Date().getMonth() + 1);
 
   return (
     <>

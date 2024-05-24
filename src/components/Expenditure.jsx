@@ -70,12 +70,14 @@ const Date = styled.span`
 const ExpenditureDetail = styled.span`
   width: 600px;
   height: 20px;
-  display: flex;
+  display: block;
   align-items: center;
   font-size: 16px;
   font-weight: bold;
   color: #343aa3;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Right = styled.div`

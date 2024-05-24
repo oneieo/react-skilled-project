@@ -88,7 +88,6 @@ const Detail = () => {
   const refItem = useRef(null);
   const refDescription = useRef(null);
   const refAmount = useRef(null);
-  console.log(refDate);
 
   const handleModiBtn = () => {
     // 3. 로컬스토리지도 업데이트
@@ -99,7 +98,8 @@ const Detail = () => {
             date: refDate.current.value,
             item: refItem.current.value,
             description: refDescription.current.value,
-            amount: refAmount.current.value,
+            // 문자열(String) 객체에 대해서는 toLocaleString() 메서드를 사용할 수 없으므로 숫자(Number) 객체로 형변환
+            amount: Number(refAmount.current.value).toLocaleString(),
           }
         : content;
     });
