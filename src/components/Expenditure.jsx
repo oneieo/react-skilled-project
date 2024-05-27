@@ -63,6 +63,7 @@ const Date = styled.span`
   margin-bottom: 3px;
   font-size: 13px;
   color: grey;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const ExpenditureDetail = styled.span`
@@ -76,6 +77,7 @@ const ExpenditureDetail = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const Right = styled.div`
@@ -96,6 +98,7 @@ const ExpenditureAmount = styled.span`
   font-size: 16px;
   font-weight: bold;
   color: #343aa3;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const Expenditure = () => {

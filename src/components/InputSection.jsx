@@ -31,6 +31,7 @@ const Box = styled.div`
   height: 55px;
   display: flex;
   flex-direction: column;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const Label = styled.label`

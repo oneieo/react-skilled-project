@@ -30,7 +30,8 @@ const MonthBtn = styled.button`
   height: 60px;
   border: none;
   border-radius: 10px;
-  font-size: 17px;
+  font-size: 16px;
+  font-family: "Noto Sans KR", sans-serif;
   // MonthBtn의 prop들(key, color, onClick) 중 color에서
   // 연산을 통해 넘겨받은 컬러(prop.color)로 색상 지정하기
   background-color: ${(prop) => prop.$bgColor};
