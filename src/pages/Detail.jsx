@@ -21,6 +21,7 @@ const Boxes = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: #e8e8e8;
+  font-family: "Noto Sans KR", sans-serif;
   //gap: 5px;
 `;
 

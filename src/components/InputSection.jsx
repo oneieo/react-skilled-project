@@ -22,6 +22,7 @@ const Boxes = styled.div`
   align-items: center;
   background-color: #ffffff;
   gap: 10px;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const Box = styled.div`
