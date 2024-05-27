@@ -1,7 +1,9 @@
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { ContentsContext } from "../context/ContentsContext";
+//import { ContentsContext } from "../context/ContentsContext";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteContents, updateContents } from "../redux/slices/contentsSlice";
 
 const Wrapper = styled.div`
   width: 800px;
@@ -76,12 +78,12 @@ const Button = styled.button`
 `;
 
 const Detail = () => {
-  const { contents, setContents } = useContext(ContentsContext);
-  const { id } = useParams();
-  const matchedContent = contents.find((content) => content.id === id);
-  console.log(contents);
-
+  //const { prevcontents, setContents } = useContext(ContentsContext);
   const navigate = useNavigate();
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const contents = useSelector((state) => state.contents.contents);
+  const matchedContent = contents.find((content) => content.id === id);
 
   // 1. 날짜, 항목, 내용, 금액을 나타내는 변수명에 useRef로 초기값 설정해주기
   const refDate = useRef(null);
@@ -99,14 +101,14 @@ const Detail = () => {
             item: refItem.current.value,
             description: refDescription.current.value,
             // 문자열(String) 객체에 대해서는 toLocaleString() 메서드를 사용할 수 없으므로 숫자(Number) 객체로 형변환
-            amount: Number(refAmount.current.value).toLocaleString(),
+            amount: Number(refAmount.current.value),
           }
         : content;
     });
 
-    console.log(updatedContents);
+    //setContents(updatedContents);
 
-    setContents(updatedContents);
+    dispatch(updateContents(updatedContents));
     localStorage.setItem("contents", JSON.stringify(updatedContents));
 
     navigate("/");
@@ -114,11 +116,10 @@ const Detail = () => {
 
   const handleDeleteBtn = () => {
     const updatedContents = contents.filter((content) => content.id !== id);
-    console.log(updatedContents);
 
     const isConfirmed = confirm("해당 지출내역을 삭제합니다.");
     if (isConfirmed) {
-      setContents(updatedContents);
+      dispatch(deleteContents(updatedContents));
       localStorage.setItem("contents", JSON.stringify(updatedContents));
       navigate("/");
     }

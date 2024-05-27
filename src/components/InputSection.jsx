@@ -1,11 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ContentsContext } from "../context/ContentsContext";
-import { DescriptionContext } from "../context/DescriptionContext";
-import { AmountContext } from "../context/AmountContext";
-import { ItemContext } from "../context/ItemContext";
-import { DateContext } from "../context/DateContext";
+import getToday from "../utils/getToday";
+import { useDispatch, useSelector } from "react-redux";
+import { createContents, loadContents } from "../redux/slices/contentsSlice";
 
 const Wrapper = styled.div`
   width: 800px;
@@ -79,11 +78,15 @@ const Button = styled.button`
 `;
 
 const InputSection = () => {
-  const { contents, setContents } = useContext(ContentsContext);
-  const { description, setDescription } = useContext(DescriptionContext);
-  const { amount, setAmount } = useContext(AmountContext);
-  const { item, setItem } = useContext(ItemContext);
-  const { date, setDate } = useContext(DateContext);
+  //const { contents, setContents } = useContext(ContentsContext);
+  const [date, setDate] = useState(getToday());
+  const [item, setItem] = useState("");
+  const [amount, setAmount] = useState("");
+  const [description, setDescription] = useState("");
+  const dispatch = useDispatch();
+  const contents = useSelector((state) => state.contents.contents);
+  //console.log(selector);
+
   // 지출내역 추가될 때마다(상태변경될때마다) 로컬스토리지에 contents 세팅
   useEffect(() => {
     // 로컬스토리지: 저장용 / setState: 화면그리기용
@@ -94,7 +97,7 @@ const InputSection = () => {
       return;
     }
     // 2. 가져온 걸 스테이트에 넣는다.
-    setContents(baseContents);
+    dispatch(loadContents(baseContents));
   }, []);
 
   const handleSaveBtn = () => {
@@ -118,9 +121,11 @@ const InputSection = () => {
       amount: Number(amount),
       description,
     };
-    setContents([...contents, newContent]);
+    //setContents([...contents, newContent]);
+
+    dispatch(createContents(newContent));
     localStorage.setItem("contents", JSON.stringify([...contents, newContent]));
-    setDate("");
+    setDate(getToday());
     setItem("");
     setDescription("");
     setAmount("");

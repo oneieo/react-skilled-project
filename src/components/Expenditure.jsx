@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ClickedMonthContext } from "../context/ClickedMonthContext";
-import { ContentsContext } from "../context/ContentsContext";
+//import { ContentsContext } from "../context/ContentsContext";
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
   width: 800px;
@@ -102,10 +103,10 @@ const ExpenditureAmount = styled.span`
 
 const Expenditure = () => {
   const { clickedMonth } = useContext(ClickedMonthContext);
-  const { contents } = useContext(ContentsContext);
   const navigate = useNavigate();
+  const selector = useSelector((state) => state.contents.contents);
 
-  const filteredList = contents.filter((data) => {
+  const filteredList = selector.filter((data) => {
     if (Number(data.date.slice(5, 7)) === clickedMonth) return data;
   });
 
