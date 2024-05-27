@@ -25,6 +25,7 @@ const Boxes = styled.div`
   align-items: center;
   background-color: #ffffff;
   gap: 15px;
+  font-family: "Noto Sans KR", sans-serif;
   //overflow-y: scroll;
 `;
 
