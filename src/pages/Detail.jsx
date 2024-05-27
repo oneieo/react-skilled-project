@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   align-items: center;
   background-color: #e8e8e8;
   border-radius: 15px;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const Boxes = styled.div`
