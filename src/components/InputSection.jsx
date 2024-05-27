@@ -1,11 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ContentsContext } from "../context/ContentsContext";
-import { DescriptionContext } from "../context/DescriptionContext";
-import { AmountContext } from "../context/AmountContext";
-import { ItemContext } from "../context/ItemContext";
-import { DateContext } from "../context/DateContext";
+import getToday from "../utils/getToday";
 
 const Wrapper = styled.div`
   width: 800px;
@@ -80,10 +77,11 @@ const Button = styled.button`
 
 const InputSection = () => {
   const { contents, setContents } = useContext(ContentsContext);
-  const { description, setDescription } = useContext(DescriptionContext);
-  const { amount, setAmount } = useContext(AmountContext);
-  const { item, setItem } = useContext(ItemContext);
-  const { date, setDate } = useContext(DateContext);
+  const [date, setDate] = useState(getToday());
+  const [item, setItem] = useState("");
+  const [amount, setAmount] = useState("");
+  const [description, setDescription] = useState("");
+
   // 지출내역 추가될 때마다(상태변경될때마다) 로컬스토리지에 contents 세팅
   useEffect(() => {
     // 로컬스토리지: 저장용 / setState: 화면그리기용
