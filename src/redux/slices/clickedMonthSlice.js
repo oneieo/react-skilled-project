@@ -7,7 +7,12 @@ const initialState = {
 const clickedMonthSlice = createSlice({
   name: "clickedMonth",
   initialState,
-  reducers: {},
+  reducers: {
+    updateClickedMonth: (state, action) => {
+      state.clickedMonth = action.payload;
+    },
+  },
 });
 
-export {};
+export const { updateClickedMonth } = clickedMonthSlice.actions;
+export default clickedMonthSlice.reducer;

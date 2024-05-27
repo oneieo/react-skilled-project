@@ -1,9 +1,8 @@
 // 중앙 관리소인 store를 만드는 설정 코드를 담을 곳
 //import { combineReducers, createStore } from "redux";
-//import date from "../modules/date";
 import { configureStore } from "@reduxjs/toolkit";
-//import dateSlice from "../slices/dateSlice";
 import contentsSlice from "../slices/contentsSlice";
+import clickedMonthSlice from "../slices/clickedMonthSlice";
 
 // 1. rootReducer를 만들기
 //const rootReducer = combineReducers({
@@ -15,6 +14,7 @@ import contentsSlice from "../slices/contentsSlice";
 const store = configureStore({
   reducer: {
     contents: contentsSlice,
+    clickedMonth: clickedMonthSlice,
   },
 });
 // 3. 만든 store 내보내기

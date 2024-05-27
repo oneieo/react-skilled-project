@@ -1,7 +1,6 @@
+import styled from "styled-components";
 import { useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import styled from "styled-components";
-//import { ContentsContext } from "../context/ContentsContext";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteContents, updateContents } from "../redux/slices/contentsSlice";
 
@@ -105,8 +104,6 @@ const Detail = () => {
           }
         : content;
     });
-
-    //setContents(updatedContents);
 
     dispatch(updateContents(updatedContents));
     localStorage.setItem("contents", JSON.stringify(updatedContents));

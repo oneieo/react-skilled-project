@@ -1,6 +1,6 @@
-import { useContext } from "react";
 import styled from "styled-components";
-import { ClickedMonthContext } from "../context/ClickedMonthContext";
+import { useDispatch, useSelector } from "react-redux";
+import { updateClickedMonth } from "../redux/slices/clickedMonthSlice";
 
 const Wrapper = styled.div`
   width: 800px;
@@ -47,9 +47,10 @@ const MonthBtn = styled.button`
 const monthList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const MonthlySection = () => {
-  const { clickedMonth, setClickedMonth } = useContext(ClickedMonthContext);
+  const dispatch = useDispatch();
+  const clickedMonth = useSelector((state) => state.clickedMonth.clickedMonth);
   const handleMonthBtn = (month) => {
-    setClickedMonth(month);
+    dispatch(updateClickedMonth(month));
   };
 
   return (
@@ -59,8 +60,12 @@ const MonthlySection = () => {
           return (
             <MonthBtn
               key={month}
-              $bgColor={month === clickedMonth ? "#6684cb" : "#cfddff"}
-              $color={month === clickedMonth ? "white" : "black"}
+              $bgColor={
+                clickedMonth && month === clickedMonth ? "#6684cb" : "#cfddff"
+              }
+              $color={
+                clickedMonth && month === clickedMonth ? "white" : "black"
+              }
               onClick={() => handleMonthBtn(month)}
             >
               {month}월
