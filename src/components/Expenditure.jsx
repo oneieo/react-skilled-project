@@ -113,25 +113,35 @@ const Expenditure = () => {
   return (
     <Wrapper>
       <Boxes>
-        {filteredList.map((data) => {
-          return (
-            <Box key={data.id} onClick={() => navigate(`/detail/${data.id}`)}>
-              <Texts>
-                <Left>
-                  <Date>{data.date}</Date>
-                  <ExpenditureDetail>
-                    {data.item} - {data.description}
-                  </ExpenditureDetail>
-                </Left>
-                <Right>
-                  <ExpenditureAmount>
-                    {data.amount.toLocaleString()}원
-                  </ExpenditureAmount>
-                </Right>
-              </Texts>
-            </Box>
-          );
-        })}
+        {filteredList.length > 0 ? (
+          filteredList.map((data) => {
+            return (
+              <Box key={data.id} onClick={() => navigate(`/detail/${data.id}`)}>
+                <Texts>
+                  <Left>
+                    <Date>{data.date}</Date>
+                    <ExpenditureDetail>
+                      {data.item} - {data.description}
+                    </ExpenditureDetail>
+                  </Left>
+                  <Right>
+                    <ExpenditureAmount>
+                      {data.amount.toLocaleString()}원
+                    </ExpenditureAmount>
+                  </Right>
+                </Texts>
+              </Box>
+            );
+          })
+        ) : (
+          <Boxes
+            style={{
+              marginTop: "20px",
+            }}
+          >
+            지출 내역이 없습니다.
+          </Boxes>
+        )}
       </Boxes>
     </Wrapper>
   );
